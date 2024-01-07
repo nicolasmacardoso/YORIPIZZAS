@@ -1,21 +1,21 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
-interface PayLoad{
+interface PayLoad {
     sub: string;
 
 }
 
 export function isAuthenticated(
-    req: Request, 
+    req: Request,
     res: Response,
     next: NextFunction
-){
+) {
 
     //Receber o token
     const authToken = req.headers.authorization;
 
-    if(!authToken){
+    if (!authToken) {
         return res.status(401).end();
     }
 
