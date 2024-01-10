@@ -20,7 +20,7 @@ class AuthUserService {
             throw new Error("Email ou senha inválido!")
         }
 
-        // verificar se a senha está correta
+        // precisa verificar se a senha está correta
         const passwordMatch = await compare(password, user.password)
 
         if (!passwordMatch) {
