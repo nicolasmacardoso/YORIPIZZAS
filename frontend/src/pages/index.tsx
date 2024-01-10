@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Yoripizza - Faça seu login</title>
+        <title>Yoripizzas - Faça seu login</title>
       </Head>
       <div className={styles.containerCenter}>
         <Image src={logoImg} alt="Logo Yoripizzas"/>

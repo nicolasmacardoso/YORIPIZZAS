@@ -13,7 +13,7 @@ export default function Signup() {
   return (
     <>
     <Head>
-    <title>Yoripizza - Cadastre-se</title>
+    <title>Yoripizzas - Cadastre-se</title>
     </Head>
     <div className={styles.containerCenter}>
     <Image src={logoImg} alt="Logo Yoripizzas"/>
