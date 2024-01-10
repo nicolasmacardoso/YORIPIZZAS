@@ -6,10 +6,10 @@ import styles from '../../styles/home.module.scss'
 
 import logoImg from '../../public/logo.svg'
 
-import { Input } from "@/components/ui/Input"
-import { Button } from "@/components/ui/Button"
+import { Input } from "../components/ui/Input"
+import { Button } from "../components/ui/Button"
 
-import { AuthContext } from "@/contexts/AuthContext"
+import { AuthContext } from "../contexts/AuthContext"
 
 import Link from 'next/link'
 
