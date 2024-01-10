@@ -15,12 +15,12 @@ class AuthUserService {
                 email: email
             }
         })
-
+ 
         if (!user) {
             throw new Error("Email ou senha inválido!")
         }
 
-        // preciso verificar se a senha está correta
+        // verificar se a senha está correta
         const passwordMatch = await compare(password, user.password)
 
         if (!passwordMatch) {
