@@ -11,6 +11,7 @@ type AuthContextData = {
   isAuthenticated: boolean;
   signIn: (credentials: SignInProps) => Promise<void>;
   signOut: () => void;
+  signUp: (credentials: SignUpProps) => Promise<void>;
 }
 
 type UserProps = {
@@ -24,6 +25,12 @@ type SignInProps = {
   password: string;
 }
 
+type SignUpProps = {
+  name: string;
+  email: string;
+  password: string;
+}
+
 type AuthProviderProps = {
   children: ReactNode;
 }
@@ -31,21 +38,21 @@ type AuthProviderProps = {
 export const AuthContext = createContext({} as AuthContextData)
 
 
-export function signOut(){
-  try{
+export function signOut() {
+  try {
     destroyCookie(undefined, '@nextauth.token')
     Router.push('/')
-  }catch{
+  } catch {
     console.log('erro ao deslogar')
   }
 }
 
-export function AuthProvider({ children }: AuthProviderProps){
+export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserProps>()
   const isAuthenticated = !!user;
 
-  async function signIn({ email, password }: SignInProps){
-    try{
+  async function signIn({ email, password }: SignInProps) {
+    try {
       const response = await api.post('/session', {
         email,
         password
@@ -72,13 +79,29 @@ export function AuthProvider({ children }: AuthProviderProps){
       Router.push('/dashboard')
 
 
-    }catch(err){
+    } catch (err) {
       console.log("ERRO AO ACESSAR ", err)
     }
   }
 
-  return(
-    <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut }}>
+  async function signUp({ name, email, password }: SignUpProps) {
+    try {
+      const response = await api.post('/users', {
+        name,
+        email,
+        password
+      })
+
+
+      Router.push('/')
+
+    } catch (err) {
+    }
+
+  }
+
+  return (
+    <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut, signUp }}>
       {children}
     </AuthContext.Provider>
   )
