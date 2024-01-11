@@ -13,6 +13,7 @@ import { AuthContext } from "@/contexts/AuthContext"
 import { toast } from "react-toastify"
 
 import Link from 'next/link'
+import { canSSRGuest } from "@/utils/canSSRGuest"
 
 export default function Signup() {
     const { signUp } = useContext(AuthContext);
@@ -95,3 +96,12 @@ export default function Signup() {
         </>
     )
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  
+    return {
+      props: {
+  
+      }
+    }
+  })
