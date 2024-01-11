@@ -19,6 +19,7 @@
     h1 {
         color: var(--white);
         padding-bottom: 4rem;
+        text-shadow: 1px 1px 5px #ffffff7c;
     }
 
     form {
@@ -38,6 +39,7 @@
     margin-top: 1rem;
     color: var(--white);
     cursor: pointer;
+    text-shadow: 1px 1px 3px #ffffffa6;
 }
 
 @media (max-width: 620px) {
