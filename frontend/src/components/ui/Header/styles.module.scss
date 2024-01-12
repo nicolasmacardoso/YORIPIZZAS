@@ -26,7 +26,7 @@
         display: inline-block;
         position: relative;
         transition: color 0.5s;
-        text-shadow: 1px 1px 3px #ffffffa6;
+        text-shadow: 1px 1px 2px #ffffff8f;
 
         & + a {
             margin-left: 2rem;
@@ -34,7 +34,7 @@
 
         &:hover{
             color: var(--red-900);
-            text-shadow: 1px 1px 3px #ff0000a6;
+            text-shadow: 1px 1px 2px #ff0000a6;
         }
     }
 
