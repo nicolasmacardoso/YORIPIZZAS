@@ -25,7 +25,6 @@ export function ModalOrder({ isOpen, onRequestClose, order, handleFinishOrder }:
             backgroundColor: '#1D1D2E'
         }
     };
-
     return (
         <Modal
             isOpen={isOpen}
@@ -45,7 +44,7 @@ export function ModalOrder({ isOpen, onRequestClose, order, handleFinishOrder }:
 
                 <h2>Detalhes do pedido</h2>
                 <span className={styles.table}>
-                    Mesa: <strong>{order[0].order.table}</strong>
+                    Mesa: <strong>{order[0].order.table}</strong> 
                 </span>
 
                 {order.map( item => (
@@ -63,3 +62,4 @@ export function ModalOrder({ isOpen, onRequestClose, order, handleFinishOrder }:
         </Modal>
     )
 }
+
