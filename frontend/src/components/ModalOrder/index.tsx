@@ -43,6 +43,7 @@ export function ModalOrder({ isOpen, onRequestClose, order, handleFinishOrder }:
             <div className={styles.container}>
 
                 <h2>Detalhes do pedido</h2>
+                
                 <span className={styles.table}>
                     Mesa: <strong>{order[0].order.table}</strong> 
                 </span>
