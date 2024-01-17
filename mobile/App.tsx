@@ -1,11 +1,13 @@
 import { View, StatusBar } from 'react-native';
-import SignIn from './src/pages/SignIn';
+
+import { NavigationContainer } from '@react-navigation/native';
+import Routes from './src/routes';
 
 export default function App() {
   return (
-    <View>
-      <SignIn/>
+    <NavigationContainer>
       <StatusBar hidden/>
-    </View>
+      <Routes/>
+    </NavigationContainer>
   );
 }
