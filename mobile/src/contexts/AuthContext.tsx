@@ -57,6 +57,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             await AsyncStorage.setItem('@yoripizzas', JSON.stringify(data))
 
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
             setUser({
                 id,
                 name,
