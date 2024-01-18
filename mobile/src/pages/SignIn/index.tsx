@@ -9,6 +9,15 @@ import {
 } from "react-native";
 
 export default function SignIn() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    function handleLogin() {
+        if (email === ''|| password === '') {
+            return;
+        }
+    }
+
     return (
         <View style={styles.container}>
             <Image
@@ -21,11 +30,15 @@ export default function SignIn() {
                     placeholder="Email"
                     style={styles.input}
                     placeholderTextColor="white"
+                    value={email}
+                    onChangeText={setEmail}
                 />
                 <TextInput
                     placeholder="Senha"
                     style={styles.input}
                     placeholderTextColor="white"
+                    value={password}
+                    onChangeText={setPassword}
                 />
 
                 <TouchableOpacity style={styles.button} onPress={handleLogin}>
