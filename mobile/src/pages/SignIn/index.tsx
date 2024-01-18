@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#1D1D2E',
     },
     logo: {
-        marginBottom: 18
+        marginBottom: 10
     },
     inputContainer: {
         width: '95%',
