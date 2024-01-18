@@ -10,6 +10,7 @@ type AuthContextData = {
     signIn: (credentials: SignInProps) => Promise<void>;
     loadingAuth: boolean;
     loading: boolean;
+    signOut: () => Promise<void>;
 }
 
 type UserProps = {
