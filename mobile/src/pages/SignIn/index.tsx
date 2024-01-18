@@ -1,10 +1,38 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { 
+    View, 
+    Text, 
+    StyleSheet,
+    Image,
+    TextInput,
+    TouchableOpacity
+} from "react-native";
 
 export default function SignIn() {
     return (
         <View style={styles.container}>
-            <Text>Tela de login</Text>
+            <Image
+                style={styles.logo}
+                source={require('../../assets/logo.png')}
+            />
+
+            <View style={styles.inputContainer}>
+                <TextInput
+                    placeholder="Email"
+                    style={styles.input}
+                    placeholderTextColor="white"
+                />
+                <TextInput
+                    placeholder="Senha"
+                    style={styles.input}
+                    placeholderTextColor="white"
+                />
+
+                <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                    <Text style={styles.buttonText}>Acessar</Text>
+                </TouchableOpacity>
+
+            </View>
         </View>
     )
 }
@@ -15,5 +43,37 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#1D1D2E',
+    },
+    logo: {
+        marginBottom: 18
+    },
+    inputContainer: {
+        width: '95%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 32,
+        paddingHorizontal: 14,
+    },
+    input: {
+        width: '95%',
+        height: 40,
+        backgroundColor: '#101026',
+        marginBottom: 12,
+        borderRadius: 4,
+        paddingHorizontal: 8,
+        color: 'white',
+    },
+    button: {
+        width: '95%',
+        height: 40,
+        backgroundColor: '#3FFFA3',
+        borderRadius: 4,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#101026',
     }
 })
