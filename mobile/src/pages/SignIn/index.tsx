@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#1D1D2E',
     },
     logo: {
-        marginBottom: 10
+        marginBottom: 5
     },
     inputContainer: {
         width: '95%',
