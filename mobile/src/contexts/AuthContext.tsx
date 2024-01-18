@@ -102,9 +102,29 @@ export function AuthProvider({ children }: AuthProviderProps) {
             setLoadingAuth(false);
         }
     }
+    
+    async function signOut() {
+        await AsyncStorage.clear()
+        .then( () => {
+            setUser({
+                id: '',
+                name: '',
+                email: '',
+                token: ''
+            })
+        })
+    }
 
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, signIn, loading, loadingAuth }}>
+        <AuthContext.Provider 
+            value={{ 
+                user, 
+                isAuthenticated, 
+                signIn, loading, 
+                loadingAuth, 
+                signOut 
+            }}
+        >
             {children}
         </AuthContext.Provider>
     )
