@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
 import { 
     View, 
     Text, 
     StyleSheet, 
     TouchableOpacity,
-    TextInput
+    TextInput,
+    Modal,
 } from 'react-native'
 
-import { useRoute, RouteProp } from '@react-navigation/native'
+import { useRoute, RouteProp, useNavigation } from '@react-navigation/native'
 
 import { Feather } from '@expo/vector-icons'
+
+import { api } from '../../services/api'
+
+import { ModalPicker } from '../../components'
 
 type RouteDetailParams = {
     Order: {
@@ -18,24 +23,72 @@ type RouteDetailParams = {
     }
 }
 
+export type CategoryProps = {
+    id: string;
+    name: string;
+}
+
 type OrderRouteProps = RouteProp<RouteDetailParams, 'Order'>;
 
 export default function Order() {
     const route = useRoute<OrderRouteProps>();
+    const navigation = useNavigation();
+
+    const [category, setCategory] = useState<CategoryProps[] | []>([])
+    const [categorySelected, setCategorySelected] = useState<CategoryProps>()
+    const [modalCategoryVisible, setModalCategoryVisible] = useState(false)
+
+    const [amount, setAmount] = useState("1");
+
+    useEffect(() => {
+        async function loadInfo() {
+            const response = await api.get('/category')
+
+            setCategory(response.data);
+            setCategorySelected(response.data[0])
+
+        }
+
+        loadInfo();
+    }, [])
+
+    async function handleCloseOrder(){
+        try {
+
+            await api.delete('/order', {
+                params: {
+                    order_id: route.params?.order_id
+                }
+            })
+
+            navigation.goBack();
+
+        } catch (err) {
+            console.log(err);
+        }     
+    }
+
+    function handleChangeCategory(item: CategoryProps) {
+        setCategorySelected(item);
+    }
 
     return (
         <View style={styles.container}>
             
             <View style={styles.header}>
                 <Text style={styles.title}> Mesa {route.params.number}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handleCloseOrder}>
                     <Feather name="trash-2" size={28} color="#FF3F4B" />
                 </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.input}>
-                <Text style={{ color: 'white'}}>Pizzas</Text>
-            </TouchableOpacity>
+            {category.length !== 0 && (
+                <TouchableOpacity style={styles.input} onPress={ () => setModalCategoryVisible(true) }>
+                    <Text style={{ color: 'white'}}>
+                        {categorySelected?.name}
+                    </Text>
+                </TouchableOpacity>
+            )}
 
             <TouchableOpacity style={styles.input}>
                 <Text style={{ color: 'white'}}>Pizza de calabresa</Text>
@@ -47,7 +100,8 @@ export default function Order() {
                     style={[styles.input, { width: '60%', textAlign: 'center' }] }
                     placeholderTextColor="white"
                     keyboardType="numeric"
-                    value="1"
+                    value={amount}
+                    onChangeText={setAmount}
                 />
             </View>
 
@@ -60,6 +114,19 @@ export default function Order() {
                     <Text style={styles.buttonText}>Avançar</Text>
                 </TouchableOpacity>
             </View>
+                
+            <Modal
+                transparent={true}
+                visible={modalCategoryVisible}
+                animationType="fade"
+            >
+                <ModalPicker
+                    handleCloseModal={ () => setModalCategoryVisible(false) }
+                    options={category}
+                    selectedItem={ handleChangeCategory }
+                />   
+            </Modal>
+
         </View>
     )
 }
