@@ -17,7 +17,7 @@ export default function Dashboard(){
             return;
         }
 
-        navigation.navigate('Order', { number: number, order_id: '' })
+        navigation.navigate('Order', { number: number, order_id: 'c79a2186-5f56-4648-bcad-616f2f9ff6b2' })
 
     }
 
