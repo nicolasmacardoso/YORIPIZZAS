@@ -3,7 +3,8 @@ import {
     View, 
     Text, 
     StyleSheet, 
-    TouchableOpacity 
+    TouchableOpacity,
+    TextInput
 } from 'react-native'
 
 import { useRoute, RouteProp } from '@react-navigation/native'
@@ -33,12 +34,22 @@ export default function Order() {
             </View>
 
             <TouchableOpacity style={styles.input}>
-                <Text style={{ color: 'white '}}>Pizzas</Text>
+                <Text style={{ color: 'white'}}>Pizzas</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.input}>
-                <Text style={{ color: 'white '}}>Pizza de calabresa</Text>
+                <Text style={{ color: 'white'}}>Pizza de calabresa</Text>
             </TouchableOpacity>
+
+            <View style={styles.qtdContainer}>
+                <Text style={styles.qtdText}>Quantidade</Text>
+                <TextInput 
+                    style={[styles.input, { width: '60%', textAlign: 'center' }] }
+                    placeholderTextColor="white"
+                    keyboardType="numeric"
+                    value="1"
+                />
+            </View>
         </View>
     )
 }
@@ -64,6 +75,24 @@ const styles = StyleSheet.create({
         marginRight: 14,
     },
     input: {
-        backgroundColor: '#101026'
+        backgroundColor: '#101026',
+        borderRadius: 4,
+        width: '100%',
+        height: 40,
+        marginBottom: 12,
+        justifyContent: 'center',
+        paddingHorizontal: 8,
+        color: 'white',
+        fontSize: 20,
+    },
+    qtdContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    qtdText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'white',
     }
 })
