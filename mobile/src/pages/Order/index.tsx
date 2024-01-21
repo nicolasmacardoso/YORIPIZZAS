@@ -1,8 +1,8 @@
-import React, { useState, useEffect} from 'react'
-import { 
-    View, 
-    Text, 
-    StyleSheet, 
+import React, { useState, useEffect } from 'react'
+import {
+    View,
+    Text,
+    StyleSheet,
     TouchableOpacity,
     TextInput,
     Modal,
@@ -28,7 +28,7 @@ export type CategoryProps = {
     name: string;
 }
 
-type ProductsProps = {
+type ProductProps = {
     id: string;
     name: string;
 }
@@ -43,8 +43,8 @@ export default function Order() {
     const [categorySelected, setCategorySelected] = useState<CategoryProps | undefined>()
     const [modalCategoryVisible, setModalCategoryVisible] = useState(false)
 
-    const [products, setProducts] = useState<ProductsProps[] | []>([]);
-    const [productSelected, setProductSelected] = useState<ProductsProps | undefined>()
+    const [products, setProducts] = useState<ProductProps[] | []>([]);
+    const [productSelected, setProductSelected] = useState<ProductProps | undefined>()
     const [modalProductVisible, setModalProductVisible] = useState(false);
 
     const [amount, setAmount] = useState("1");
@@ -63,7 +63,7 @@ export default function Order() {
 
     useEffect(() => {
 
-        async function loadProducts(){
+        async function loadProducts() {
             const response = await api.get('/category/product', {
                 params: {
                     category_id: categorySelected?.id
@@ -79,7 +79,7 @@ export default function Order() {
 
     }, [categorySelected])
 
-    async function handleCloseOrder(){
+    async function handleCloseOrder() {
         try {
 
             await api.delete('/order', {
@@ -92,16 +92,20 @@ export default function Order() {
 
         } catch (err) {
             console.log(err);
-        }     
+        }
     }
 
     function handleChangeCategory(item: CategoryProps) {
         setCategorySelected(item);
     }
 
+    function handleChangeProduct(item: ProductProps) {
+        setProductSelected(item);
+    }
+
     return (
         <View style={styles.container}>
-            
+
             <View style={styles.header}>
                 <Text style={styles.title}> Mesa {route.params.number}</Text>
                 <TouchableOpacity onPress={handleCloseOrder}>
@@ -110,16 +114,16 @@ export default function Order() {
             </View>
 
             {category.length !== 0 && (
-                <TouchableOpacity style={styles.input} onPress={ () => setModalCategoryVisible(true) }>
-                    <Text style={{ color: 'white'}}>
+                <TouchableOpacity style={styles.input} onPress={() => setModalCategoryVisible(true)}>
+                    <Text style={{ color: 'white' }}>
                         {categorySelected?.name}
                     </Text>
                 </TouchableOpacity>
             )}
 
             {products.length !== 0 && (
-                <TouchableOpacity style={styles.input}>
-                    <Text style={{ color: 'white'}}>
+                <TouchableOpacity style={styles.input} onPress={() => setModalProductVisible(true)}>
+                    <Text style={{ color: 'white' }}>
                         {productSelected?.name}
                     </Text>
                 </TouchableOpacity>
@@ -127,8 +131,8 @@ export default function Order() {
 
             <View style={styles.qtdContainer}>
                 <Text style={styles.qtdText}>Quantidade</Text>
-                <TextInput 
-                    style={[styles.input, { width: '60%', textAlign: 'center' }] }
+                <TextInput
+                    style={[styles.input, { width: '60%', textAlign: 'center' }]}
                     placeholderTextColor="white"
                     keyboardType="numeric"
                     value={amount}
@@ -137,7 +141,6 @@ export default function Order() {
             </View>
 
             <View style={styles.actions}>
-                <TouchableOpacity style={styles.buttonAdd}>
                     <Text style={styles.buttonText}>+</Text>
                 </TouchableOpacity>
 
@@ -152,10 +155,24 @@ export default function Order() {
                 animationType="fade"
             >
                 <ModalPicker
-                    handleCloseModal={ () => setModalCategoryVisible(false) }
+                    handleCloseModal={() => setModalCategoryVisible(false)}
                     options={category}
-                    selectedItem={ handleChangeCategory }
-                />   
+                    selectedItem={handleChangeCategory}
+                />
+
+            </Modal>
+
+            <Modal
+                transparent={true}
+                visible={modalProductVisible}
+                animationType="fade"
+            >
+                <ModalPicker
+                    handleCloseModal={() => setModalProductVisible(false)}
+                    options={products}
+                    selectedItem={handleChangeProduct}
+                />
+
             </Modal>
 
         </View>
