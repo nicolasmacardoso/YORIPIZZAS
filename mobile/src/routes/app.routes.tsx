@@ -37,7 +37,13 @@ function AppRoutes() {
             <Stack.Screen
                 name="FinishOrder"
                 component={FinishOrder}
-                options={{ headerShown: false }}
+                options={{ 
+                    title: 'Finalizando',
+                    headerStyle: {
+                        backgroundColor: '#1D1D2E'
+                    },
+                    headerTintColor: '#FFF'
+                }}
             />
         </Stack.Navigator>
     )
