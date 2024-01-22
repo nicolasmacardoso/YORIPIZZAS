@@ -13,7 +13,7 @@ interface ItemProps {
 export function ListItem({ data }: ItemProps) {
     return (
         <View style={styles.container}>
-            <Text>Item da lista</Text>
+            <Text>{data.name}</Text>
         </View>
     )
 }

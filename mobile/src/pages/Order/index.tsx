@@ -114,7 +114,21 @@ export default function Order() {
     }
 
     async function handleAdd() {
-        
+        const response = await api.post('/order/add', {
+            order_id: route.params?.order_id,
+            product_id: productSelected?.id,
+            amount: Number(amount)
+        })
+
+        let data = {
+            id: response.data.id,
+            product_id: productSelected?.id as string,
+            name: productSelected?.name as string,
+            amount: amount
+        }
+
+        setItems(oldArray => [...oldArray, data])
+
     }
 
     return (
