@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     },
     content: {
         width: WIDTH - 20,
-        height: HEIGHT / 2,
+        height: HEIGHT / 2.5,
         backgroundColor: 'white',
         borderWidth: 1,
         borderColor: '#8A8A8A',
