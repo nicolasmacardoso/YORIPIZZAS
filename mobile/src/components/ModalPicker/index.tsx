@@ -8,7 +8,7 @@ import {
     ScrollView
 } from 'react-native'
 
-import { CategoryProps } from '../pages/Order'
+import { CategoryProps } from '../../pages/Order'
 
 interface ModalPickerProps {
     options: CategoryProps[];

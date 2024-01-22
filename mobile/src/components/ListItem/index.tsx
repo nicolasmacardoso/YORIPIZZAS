@@ -10,7 +10,7 @@ interface ItemProps {
         name: string;
         amount: string | number;
     };
-    deleteItem: (item_id) => void;
+    deleteItem: (item_id: string) => void;
 }
 
 export function ListItem({ data, deleteItem }: ItemProps) {
