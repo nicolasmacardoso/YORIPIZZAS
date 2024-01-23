@@ -3,14 +3,26 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 import { Feather } from '@expo/vector-icons'
 
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native'
 
+type RouteDetailParams = {
+  FinishOrder: {
+    number: string | number;
+    order_id: string;
+  }
+}
 
-
+type FinishOrderRouteProp = RouteProp<RouteDetailParams, 'FinishOrder'>
 
 
 export default function FinishOrder(){
-
+    const route = useRoute<FinishOrderRouteProp>();
+  
+    async function handleFinish(){
+      alert("CLICOU")
+    }
+  
+  
     return(
       <View style={styles.container}>
         <Text style={styles.alert}>Você deseja finalizar esse pedido?</Text>
